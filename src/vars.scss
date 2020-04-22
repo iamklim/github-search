@@ -1,0 +1,19 @@
+$textColor: #ffefb9;
+$accentColor: #e85454;
+$bgColor: #282b2f;
+$defaultFont: "Roboto", sans-serif;
+
+%full-screen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+%absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

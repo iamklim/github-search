@@ -1,0 +1,22 @@
+@import "../../vars";
+
+.input {
+  color: $textColor;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  -webkit-appearance: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+  &::-ms-clear {
+    display: none;
+  }
+}
