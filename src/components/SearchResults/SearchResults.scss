@@ -1,1 +1,46 @@
 @import "../../vars";
+
+.search-results {
+  pointer-events: auto;
+  width: 95%;
+  margin: auto;
+
+  .search--open & {
+    pointer-events: none;
+  }
+}
+
+.results-table {
+  display: block;
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 14%);
+    grid-template-rows: 100% auto;
+    transition: 0.5s;
+
+    &:hover {
+      background: #53545c;
+      transition: 500ms;
+    }
+
+    &:first-of-type .results-table__col {
+      color: white;
+    }
+
+  }
+
+  &__col {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    padding: 0.5em 0.5em;
+    border-bottom: solid 1px #d9d9d9;
+    word-break: break-word;
+    &--left {
+      justify-items: start;
+    }
+  }
+}
+

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./SearchResults.scss";
-import Loader from "../Loader";
 
 function SearchResults({ results }) {
   const [totalCount, setTotalCount] = useState(null);
@@ -20,14 +19,61 @@ function SearchResults({ results }) {
 
   return (
     <div className="search-results">
-      {items && (
-        <ul className="search-results__list">
+      {items && items.length > 0 && (
+        <div className="results-table" role="table" aria-label="Search results">
+          <div className="results-table__row" role="rowgroup">
+            <div className="results-table__col" role="columnheader">
+              Id
+            </div>
+            <div className="results-table__col" role="columnheader">
+              Name
+            </div>
+            <div className="results-table__col" role="columnheader">
+              Description
+            </div>
+            <div className="results-table__col" role="columnheader">
+              Language
+            </div>
+            <div className="results-table__col" role="columnheader">
+              Forks
+            </div>
+            <div className="results-table__col" role="columnheader">
+              Stars
+            </div>
+            <div className="results-table__col" role="columnheader">
+              Watchers
+            </div>
+          </div>
+
           {items.map((item) => (
-            <li className="search-results__list-item" key={item.id}>
-              {item.name}
-            </li>
+            <div className="results-table__row" role="rowgroup" key={item.id}>
+              <div className="results-table__col" role="cell">
+                {item.id}
+              </div>
+              <div className="results-table__col" role="cell">
+                {item.name}
+              </div>
+              <div
+                className="results-table__col results-table__col--left"
+                role="cell"
+              >
+                {item.description}
+              </div>
+              <div className="results-table__col" role="cell">
+                {item.language}
+              </div>
+              <div className="results-table__col" role="cell">
+                {item.forks_count}
+              </div>
+              <div className="results-table__col" role="cell">
+                {item.stargazers_count}
+              </div>
+              <div className="results-table__col" role="cell">
+                {item.watchers_count}
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
