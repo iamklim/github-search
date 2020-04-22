@@ -6,23 +6,27 @@ const Input = forwardRef(
     {
       value,
       onChange,
-      onFocus,
-      name,
-      type = "text",
-      placeholder = "",
       className,
+      name,
+      onFocus,
+      onKeyDown,
+      onKeyUp,
+      placeholder = "",
+      type = "text",
     },
     ref
   ) => (
     <input
       ref={ref}
       value={value}
-      onChange={onChange}
-      onFocus={onFocus}
       className={`input ${className ? className : ""}`}
       name={name}
-      type={type}
+      onChange={onChange}
+      onFocus={onFocus}
+      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
       placeholder={placeholder}
+      type={type}
       autoComplete="off"
       autoCorrect="off"
       autoCapitalize="off"
@@ -30,32 +34,5 @@ const Input = forwardRef(
     />
   )
 );
-
-// const Input = forwardRef({
-//   value,
-//   onChange,
-//   onFocus,
-//   name,
-//   type = "text",
-//   placeholder = "",
-//   className,
-// }, ref) => {
-//   return (
-//     <input
-//       ref={ref}
-//       value={value}
-//       onChange={onChange}
-//       onFocus={onFocus}
-//       className={`input ${className ? className : ""}`}
-//       name={name}
-//       type={type}
-//       placeholder={placeholder}
-//       autoComplete="off"
-//       autoCorrect="off"
-//       autoCapitalize="off"
-//       spellCheck="false"
-//     />
-//   );
-// }
 
 export default Input;
