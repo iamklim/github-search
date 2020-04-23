@@ -1,6 +1,7 @@
 import React from "react";
-import "./Suggestion.scss";
+import PropTypes from "prop-types";
 import RadioButton from "../RadioButton";
+import "./Suggestion.scss";
 
 function Suggestion({ languages, setLanguages, sorting, setSorting }) {
   const onLanguageSelect = (value) => {
@@ -59,5 +60,12 @@ function Suggestion({ languages, setLanguages, sorting, setSorting }) {
     </div>
   );
 }
+
+Suggestion.propTypes = {
+  languages: PropTypes.array,
+  setLanguages: PropTypes.func,
+  sorting: PropTypes.string,
+  setSorting: PropTypes.func,
+};
 
 export default Suggestion;

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 
 import Input from "../Input";
@@ -64,16 +65,13 @@ function SearchForm({
     }
   };
 
-  const checkInputAndPerformSearch = () => {
-    const inputValueTrimmed = inputValue.trim();
-    if (inputValueTrimmed.length) {
-      performSearch(inputValueTrimmed);
-    }
-  };
-
+  // new search when one of parameters is updated
   useEffect(() => {
     if (languages || sorting || currentPage) {
-      checkInputAndPerformSearch();
+      const inputValueTrimmed = inputValue.trim();
+      if (inputValueTrimmed.length > 2) {
+        performSearch(inputValueTrimmed);
+      }
     }
   }, [languages, sorting, currentPage]);
 
@@ -89,9 +87,10 @@ function SearchForm({
 
     if (targetValue.length > 2) {
       debouncedSearch(targetValue);
-    } else {
-      setResults(null);
     }
+    // else {
+    //   setResults(null);
+    // }
   };
 
   // Previous requests canceled on keydown
@@ -126,5 +125,14 @@ function SearchForm({
     </>
   );
 }
+
+SearchForm.propTypes = {
+  setIsSearchOpen: PropTypes.func,
+  setResults: PropTypes.func,
+  languages: PropTypes.array,
+  sorting: PropTypes.string,
+  currentPage: PropTypes.number,
+  setIsLoading: PropTypes.func,
+};
 
 export default SearchForm;

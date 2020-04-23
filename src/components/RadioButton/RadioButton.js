@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./RadioButton.scss";
 
 function RadioButton({ text, value, checked, onChange }) {
@@ -16,5 +17,12 @@ function RadioButton({ text, value, checked, onChange }) {
     </label>
   );
 }
+
+RadioButton.propTypes = {
+  text: PropTypes.string,
+  value: PropTypes.string,
+  checked: PropTypes.bool,
+  onChange: PropTypes.func,
+};
 
 export default RadioButton;

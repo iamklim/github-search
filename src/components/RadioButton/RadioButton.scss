@@ -1,7 +1,5 @@
 @import "../../vars";
 
-
-/* The container */
 .radio-btn {
   display: inline-block;
   position: relative;
@@ -37,22 +35,14 @@
     }
   }
 
-  /* On mouse-over, add a grey background color */
   &:hover input:not(:checked) ~ .radio-btn__checkmark {
     background-color: $accentColor;
   }
 
-  /* When the radio button is checked, add a blue background */
-  input:checked ~ .radio-btn__checkmark {
-    //background-color: $accentColor;
-  }
-
-  /* Show the indicator (dot/circle) when checked */
   input:checked ~ .radio-btn__checkmark:after {
     display: block;
   }
 
-  /* Style the indicator (dot/circle) */
   .radio-btn__checkmark:after {
     top: 2px;
     left: 2px;
