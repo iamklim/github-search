@@ -1,4 +1,5 @@
 export const apiUrl = process.env.REACT_APP_API_URL;
+
 export const resultsPerPage = 30;
 export const initialLanguageList = [
   {

@@ -4,7 +4,7 @@ import { apiUrl } from "../config";
 
 // Caching requests here to prevent unnecessary API calls
 const requestWithCache = wrapper(axios, {
-  maxCacheSize: 50,
+  maxCacheSize: 100,
 });
 
 // Adding filter by Regexps, only the GET request whose url hit the filter reg will be cached.

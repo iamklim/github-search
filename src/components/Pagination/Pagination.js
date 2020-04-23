@@ -10,15 +10,15 @@ function Pagination({ totalItems, setCurrentPage, isLoading }) {
   const [pager, setPager] = useState({});
 
   const setPage = (page) => {
-    if (page < 1 || page > pager.totalPages) {
-      return;
+    try {
+      // get new pager object for specified page
+      const pagerUpdated = getPager(totalItems, page, resultsPerPage);
+
+      setPager(pagerUpdated);
+      setCurrentPage(page);
+    } catch (err) {
+      console.log(err);
     }
-
-    // get new pager object for specified page
-    const pagerUpdated = getPager(totalItems, page, resultsPerPage);
-
-    setPager(pagerUpdated);
-    setCurrentPage(page);
   };
 
   // go to fist page if totalItems has changed

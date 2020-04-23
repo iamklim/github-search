@@ -63,7 +63,7 @@ function SearchResults({ results }) {
             </a>
           </div>
           <div
-            className="results-table__col results-table__col--left results-table__col--desktop"
+            className="results-table__col results-table__col--left"
             role="cell"
           >
             {description}

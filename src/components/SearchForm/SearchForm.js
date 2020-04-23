@@ -28,13 +28,21 @@ function SearchForm({
   const cancelTokenSource = CancelToken.source();
 
   const openSearch = () => {
-    setIsSearchOpen(true);
-    inputSearchRef.current.focus();
+    try {
+      setIsSearchOpen(true);
+      inputSearchRef.current.focus();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const closeSearch = () => {
-    setIsSearchOpen(false);
-    inputSearchRef.current.blur();
+    try {
+      setIsSearchOpen(false);
+      inputSearchRef.current.blur();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const checkEscapeAndEnter = (e) => {
@@ -88,9 +96,6 @@ function SearchForm({
     if (targetValue.length > 2) {
       debouncedSearch(targetValue);
     }
-    // else {
-    //   setResults(null);
-    // }
   };
 
   // Previous requests canceled on keydown
