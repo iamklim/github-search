@@ -1,4 +1,5 @@
 @import "../../vars";
+@import "../../mixins";
 
 .search-results {
   //pointer-events: auto;
@@ -20,13 +21,22 @@
     grid-template-rows: 100% auto;
     transition: 0.5s;
 
+    @include media-phone {
+      grid-template-columns: 16% 28% 20% 18% 18%;
+    }
+
     &:hover {
       background: #53545c;
       transition: 500ms;
     }
 
-    &:first-of-type .results-table__col {
-      color: white;
+    &:first-of-type {
+      position: sticky;
+      top: 0;
+      background: #53545c;
+      .results-table__col {
+        color: white;
+      }
     }
 
   }
@@ -43,6 +53,11 @@
     overflow: hidden;
     &--left {
       text-align: left;
+    }
+    @include media-phone {
+      &--desktop {
+        display: none;
+      }
     }
   }
 }

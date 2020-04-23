@@ -11,7 +11,6 @@ import getRepositories from "../../services/getRepositories";
 import useEventListener from "../../hooks/useEventListener";
 
 import "./SearchForm.scss";
-import Loader from "../Loader";
 
 function SearchForm({
   setIsSearchOpen,
@@ -19,8 +18,8 @@ function SearchForm({
   languages,
   sorting,
   currentPage,
+  setIsLoading,
 }) {
-  const [isLoading, setIsLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const inputSearchRef = useRef(null);
 
@@ -105,12 +104,6 @@ function SearchForm({
 
   return (
     <>
-      <div
-        className={`search__loader ${isLoading ? "search__loader--shown" : ""}`}
-      >
-        <Loader />
-      </div>
-
       <Button
         className="btn--search-close"
         icon={<IconCross />}

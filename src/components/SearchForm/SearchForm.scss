@@ -28,7 +28,11 @@
     position: absolute;
     top: 1.25em;
     left: 1.25em;
-    padding: 10px;
+    padding: .34em;
+
+    @include media-phone {
+      font-size: 1.15em;
+    }
   }
 
   &__form {

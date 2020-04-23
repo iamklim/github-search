@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { resultsPerPage } from "../../config";
 import "./Pagination.scss";
 
-function Pagination({ totalItems, setCurrentPage }) {
+function Pagination({ totalItems, setCurrentPage, isLoading }) {
   const [pager, setPager] = useState({});
 
   const getPager = (totalItems, currentPage, pageSize) => {
@@ -76,33 +76,67 @@ function Pagination({ totalItems, setCurrentPage }) {
     return null;
   }
 
+  const generateItem = ({
+    key,
+    text,
+    isActive,
+    isDisabled,
+    onlyDesktop,
+    onClick,
+  }) => {
+    return (
+      <li
+        key={key}
+        className={`pagination__list-item ${
+          isActive ? "pagination__list-item--active" : ""
+        } ${isDisabled ? "pagination__list-item--disabled" : ""} ${
+          onlyDesktop ? "pagination__list-item--desktop" : ""
+        }`}
+        onClick={onClick}
+      >
+        {text}
+      </li>
+    );
+  };
+
   return (
-    <nav className="pagination-nav">
-      <ul className="pagination">
-        <li className={pager.currentPage === 1 ? "disabled" : ""}>
-          <a onClick={() => setPage(1)}>First</a>
-        </li>
-        <li className={pager.currentPage === 1 ? "disabled" : ""}>
-          <a onClick={() => setPage(pager.currentPage - 1)}>Previous</a>
-        </li>
-        {pager.pages.map((page, index) => (
-          <li
-            key={index}
-            className={pager.currentPage === page ? "active" : ""}
-          >
-            <a onClick={() => setPage(page)}>{page}</a>
-          </li>
-        ))}
-        <li
-          className={pager.currentPage === pager.totalPages ? "disabled" : ""}
-        >
-          <a onClick={() => setPage(pager.currentPage + 1)}>Next</a>
-        </li>
-        <li
-          className={pager.currentPage === pager.totalPages ? "disabled" : ""}
-        >
-          <a onClick={() => setPage(pager.totalPages)}>Last</a>
-        </li>
+    <nav className="pagination">
+      <ul className="pagination__list">
+        {generateItem({
+          key: "page-first",
+          text: "First",
+          isDisabled: pager.currentPage === 1 || isLoading,
+          onClick: () => setPage(1),
+        })}
+        {generateItem({
+          key: "page-prev",
+          text: "Previous",
+          isDisabled: pager.currentPage === 1 || isLoading,
+          onClick: () => setPage(pager.currentPage - 1),
+        })}
+        {pager.pages &&
+          pager.pages.map((page, index) =>
+            generateItem({
+              key: `page-${index}`,
+              text: page,
+              isActive: pager.currentPage === page,
+              isDisabled: isLoading,
+              onClick: () => setPage(page),
+              onlyDesktop: true,
+            })
+          )}
+        {generateItem({
+          key: "page-next",
+          text: "Next",
+          isDisabled: pager.currentPage === pager.totalPages || isLoading,
+          onClick: () => setPage(pager.currentPage + 1),
+        })}
+        {generateItem({
+          key: "page-last",
+          text: "Last",
+          isDisabled: pager.currentPage === pager.totalPages || isLoading,
+          onClick: () => setPage(pager.totalPages),
+        })}
       </ul>
     </nav>
   );

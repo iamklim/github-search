@@ -28,7 +28,10 @@ function SearchResults({ results }) {
             <div className="results-table__col" role="columnheader">
               Name and link
             </div>
-            <div className="results-table__col" role="columnheader">
+            <div
+              className="results-table__col results-table__col--desktop"
+              role="columnheader"
+            >
               Description
             </div>
             <div className="results-table__col" role="columnheader">
@@ -56,7 +59,7 @@ function SearchResults({ results }) {
                 </a>
               </div>
               <div
-                className="results-table__col results-table__col--left"
+                className="results-table__col results-table__col--left results-table__col--desktop"
                 role="cell"
               >
                 {item.description}

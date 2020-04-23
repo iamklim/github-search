@@ -1,9 +1,50 @@
 @import "../../vars";
-.pagination-nav {
-  .disabled a {
-    color: green;
-  }
-  .active a {
-    color: white;
+@import "../../mixins";
+
+.pagination {
+  margin-bottom: 20px;
+
+  &__list {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+
+    &-item {
+      color: $accentColor;
+      cursor: pointer;
+      padding: 10px;
+      margin: 0 2px;
+      line-height: 1;
+      border-radius: 8px;
+      transition: background .35s;
+      min-width: 36px;
+      text-align: center;
+
+      &:hover {
+        background: $textColor;
+      }
+
+      &--disabled {
+        opacity: .5;
+        pointer-events: none;
+      }
+
+      &--active {
+        font-weight: bold;
+        background: $textColor;
+        pointer-events: none;
+      }
+
+      @include media-phone {
+        &--desktop {
+          display: none;
+        }
+      }
+
+    }
   }
 }
