@@ -26,7 +26,7 @@ function SearchResults({ results }) {
               Id
             </div>
             <div className="results-table__col" role="columnheader">
-              Name
+              Name and link
             </div>
             <div className="results-table__col" role="columnheader">
               Description
@@ -40,18 +40,20 @@ function SearchResults({ results }) {
             <div className="results-table__col" role="columnheader">
               Stars
             </div>
-            <div className="results-table__col" role="columnheader">
-              Watches
-            </div>
           </div>
 
           {items.map((item) => (
             <div className="results-table__row" role="rowgroup" key={item.id}>
-              <div className="results-table__col" role="cell">
+              <div
+                className="results-table__col results-table__col--left"
+                role="cell"
+              >
                 {item.id}
               </div>
               <div className="results-table__col" role="cell">
-                {item.name}
+                <a href={item.html_url} target="_blank">
+                  {item.name}
+                </a>
               </div>
               <div
                 className="results-table__col results-table__col--left"
@@ -67,9 +69,6 @@ function SearchResults({ results }) {
               </div>
               <div className="results-table__col" role="cell">
                 {item.stargazers_count}
-              </div>
-              <div className="results-table__col" role="cell">
-                {item.watchers_count}
               </div>
             </div>
           ))}

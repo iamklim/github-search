@@ -1,0 +1,9 @@
+@import "../../vars";
+.pagination-nav {
+  .disabled a {
+    color: green;
+  }
+  .active a {
+    color: white;
+  }
+}

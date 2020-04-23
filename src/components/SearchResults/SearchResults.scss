@@ -4,7 +4,7 @@
   //pointer-events: auto;
   width: 95%;
   max-width: 1400px;
-  margin: auto;
+  margin: 0 auto;
 
   .search--open & {
     //pointer-events: none;
@@ -16,7 +16,7 @@
 
   &__row {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 14%);
+    grid-template-columns: 8% 18% 40% 14% 10% 10%;
     grid-template-rows: 100% auto;
     transition: 0.5s;
 
@@ -34,7 +34,7 @@
   &__col {
     display: grid;
     align-items: center;
-    justify-items: center;
+    text-align: center;
     width: 100%;
     padding: 0.5em 0.5em;
     border-bottom: solid 1px #d9d9d9;
@@ -42,7 +42,7 @@
     max-height: 300px;
     overflow: hidden;
     &--left {
-      justify-items: start;
+      text-align: left;
     }
   }
 }

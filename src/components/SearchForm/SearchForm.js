@@ -13,7 +13,13 @@ import useEventListener from "../../hooks/useEventListener";
 import "./SearchForm.scss";
 import Loader from "../Loader";
 
-function SearchForm({ setIsSearchOpen, setResults, languages, sorting }) {
+function SearchForm({
+  setIsSearchOpen,
+  setResults,
+  languages,
+  sorting,
+  currentPage,
+}) {
   const [isLoading, setIsLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const inputSearchRef = useRef(null);
@@ -42,9 +48,10 @@ function SearchForm({ setIsSearchOpen, setResults, languages, sorting }) {
     try {
       setIsLoading(true);
       const response = await getRepositories({
-        languages,
-        sort: sorting,
         query: value,
+        page: currentPage,
+        sort: sorting,
+        languages,
         cancelTokenSource,
       });
 
@@ -66,10 +73,10 @@ function SearchForm({ setIsSearchOpen, setResults, languages, sorting }) {
   };
 
   useEffect(() => {
-    if (languages || sorting) {
+    if (languages || sorting || currentPage) {
       checkInputAndPerformSearch();
     }
-  }, [languages, sorting]);
+  }, [languages, sorting, currentPage]);
 
   // debouncing request for 500 msec to wait when user
   // finishes typing to avoid unnecessary requests
