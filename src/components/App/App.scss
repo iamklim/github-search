@@ -38,40 +38,6 @@
     overflow: hidden;
 
   }
-
-  &__suggestion {
-    position: absolute;
-    top: 50vh;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50%;
-    max-width: 450px;
-    //margin: calc(40vh + 2em) auto 0;
-    text-align: left;
-    pointer-events: none;
-
-    &:nth-child(2) {
-      margin: 0 3em;
-    }
-
-    h3 {
-      font-size: 1.4em;
-      margin: 0;
-
-      &:before {
-        content: '\21FE';
-        display: inline-block;
-        padding: 0 0.5em 0 0;
-      }
-    }
-
-    p {
-      font-size: 1.25em;
-      line-height: 1.4;
-      margin: 0.75em 0 0 0;
-      color: $accentColor;
-    }
-  }
 }
 
 /* Transitions */
@@ -82,15 +48,6 @@
     transition-timing-function: cubic-bezier(0.7,0,0.3,1);
   }
 
-  &__suggestion {
-    h3, p {
-      opacity: 0;
-      transform: translate3d(0, 100px, 0);
-      transition: opacity 0.2s, transform 0.5s;
-      transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-    }
-  }
-
   &--open {
     pointer-events: auto;
 
@@ -98,29 +55,7 @@
       opacity: 1;
     }
 
-    .search__suggestion h3,
-    .search__suggestion p {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-      transition: opacity 0.5s, transform 0.5s;
-      transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-    }
-
-    .search--open .search__suggestion p {
-      transition-delay: 0.1s;
-    }
   }
 
-}
-
-@include media-phone {
-  .search {
-    &__suggestion {
-      font-size: 0.85em;
-      width: 100%;
-      //margin-top: 40vh;
-      padding: 0 1em;
-    }
-  }
 }
 

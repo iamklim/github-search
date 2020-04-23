@@ -9,10 +9,21 @@ const getRepositories = ({
   page = "1",
   sort = "stars",
   order = "desc",
+  languages,
   cancelTokenSource,
 }) => {
   try {
-    const url = `${apiUrl}/search/repositories?q=${query}&sort=${sort}&order=${order}&page=${page}&per_page=${resultsPerPage}`;
+    let languageFilter = "";
+
+    if (languages) {
+      languages.forEach((language) => {
+        if (language.isEnabled) {
+          languageFilter += `+language:${language.key}`;
+        }
+      });
+    }
+
+    const url = `${apiUrl}/search/repositories?q=${query}${languageFilter}&sort=${sort}&order=${order}&page=${page}&per_page=${resultsPerPage}`;
 
     // caching requests using wrapper
     return requestWithCache.get(url, {

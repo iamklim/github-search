@@ -9,7 +9,6 @@ const requestWithCache = wrapper(axios, {
 
 // Adding filter by Regexps, only the GET request whose url hit the filter reg will be cached.
 const filter = new RegExp(`${apiUrl}/search/repositories`);
-console.log(filter);
 requestWithCache.__addFilter(filter);
 
 export default requestWithCache;

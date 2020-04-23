@@ -1,0 +1,70 @@
+@import "../../vars";
+
+
+/* The container */
+.radio-btn {
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  font-size: 1.25em;
+  line-height: 1;
+  margin: .2em .25em .2em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  &__checkmark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    border: 2px solid $accentColor;
+    border-radius: 50%;
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+  }
+
+  /* On mouse-over, add a grey background color */
+  &:hover input:not(:checked) ~ .radio-btn__checkmark {
+    background-color: $accentColor;
+  }
+
+  /* When the radio button is checked, add a blue background */
+  input:checked ~ .radio-btn__checkmark {
+    //background-color: $accentColor;
+  }
+
+  /* Show the indicator (dot/circle) when checked */
+  input:checked ~ .radio-btn__checkmark:after {
+    display: block;
+  }
+
+  /* Style the indicator (dot/circle) */
+  .radio-btn__checkmark:after {
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: $textColor;
+  }
+}
+
+
+
+
+
+

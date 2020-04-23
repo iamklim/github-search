@@ -1,0 +1,99 @@
+@import "../../vars";
+@import "../../mixins";
+
+.search {
+  &__suggestion {
+    position: absolute;
+    top: 50vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    max-width: 450px;
+    text-align: left;
+    //pointer-events: none;
+
+    &:nth-child(2) {
+      margin: 0 3em;
+    }
+
+    h3 {
+      font-size: 1.4em;
+      margin: 0;
+
+      &:before {
+        content: '\21FE';
+        display: inline-block;
+        padding: 0 0.5em 0 0;
+      }
+    }
+  }
+}
+
+.language-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0 -.25em;
+
+  &__item {
+    font-size: 1.25em;
+    line-height: 1.4;
+    margin: .2em .25em .2em;
+    color: $accentColor;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 5px 10px;
+
+    &--active {
+      color: $textColor;
+      background: $accentColor;
+    }
+  }
+}
+
+.sorting-form {
+  &__title {
+    display: inline-block;
+    font-size: 1.25em;
+  }
+}
+
+/* Transitions */
+.search {
+  &__suggestion {
+    h3, .language-list, .sorting-form {
+      opacity: 0;
+      transform: translate3d(0, 100px, 0);
+      transition: opacity 0.2s, transform 0.5s;
+      transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+    }
+  }
+
+  &--open {
+    .search__suggestion h3,
+    .language-list, .sorting-form {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      transition: opacity 0.5s, transform 0.5s;
+      transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+    }
+
+    .language-list {
+      transition-delay: 0.1s;
+    }
+
+    .sorting-form {
+      transition-delay: 0.2s;
+    }
+  }
+
+}
+
+@include media-phone {
+  .search__suggestion {
+    font-size: 0.85em;
+    width: 100%;
+    padding: 0 1em;
+  }
+}

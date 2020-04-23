@@ -41,7 +41,7 @@ function SearchResults({ results }) {
               Stars
             </div>
             <div className="results-table__col" role="columnheader">
-              Watchers
+              Watches
             </div>
           </div>
 

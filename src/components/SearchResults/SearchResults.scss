@@ -1,12 +1,13 @@
 @import "../../vars";
 
 .search-results {
-  pointer-events: auto;
+  //pointer-events: auto;
   width: 95%;
+  max-width: 1400px;
   margin: auto;
 
   .search--open & {
-    pointer-events: none;
+    //pointer-events: none;
   }
 }
 
@@ -38,6 +39,8 @@
     padding: 0.5em 0.5em;
     border-bottom: solid 1px #d9d9d9;
     word-break: break-word;
+    max-height: 300px;
+    overflow: hidden;
     &--left {
       justify-items: start;
     }

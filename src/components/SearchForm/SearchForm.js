@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 import Input from "../Input";
@@ -13,7 +13,7 @@ import useEventListener from "../../hooks/useEventListener";
 import "./SearchForm.scss";
 import Loader from "../Loader";
 
-function SearchForm({ setIsSearchOpen, setResults }) {
+function SearchForm({ setIsSearchOpen, setResults, languages, sorting }) {
   const [isLoading, setIsLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const inputSearchRef = useRef(null);
@@ -38,12 +38,12 @@ function SearchForm({ setIsSearchOpen, setResults }) {
   };
   useEventListener("keyup", checkEscapeAndEnter);
 
-  // debouncing request for 500 msec to wait when user
-  // finishes typing to avoid unnecessary requests
-  const debouncedSearch = debounce(async (value) => {
+  const performSearch = async (value) => {
     try {
       setIsLoading(true);
       const response = await getRepositories({
+        languages,
+        sort: sorting,
         query: value,
         cancelTokenSource,
       });
@@ -56,6 +56,25 @@ function SearchForm({ setIsSearchOpen, setResults }) {
       console.log(err);
       setIsLoading(false);
     }
+  };
+
+  const checkInputAndPerformSearch = () => {
+    const inputValueTrimmed = inputValue.trim();
+    if (inputValueTrimmed.length) {
+      performSearch(inputValueTrimmed);
+    }
+  };
+
+  useEffect(() => {
+    if (languages || sorting) {
+      checkInputAndPerformSearch();
+    }
+  }, [languages, sorting]);
+
+  // debouncing request for 500 msec to wait when user
+  // finishes typing to avoid unnecessary requests
+  const debouncedSearch = debounce((value) => {
+    performSearch(value);
   }, 500);
 
   // New requests are sent on keyup
