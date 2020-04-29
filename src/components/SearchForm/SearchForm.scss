@@ -8,6 +8,12 @@
   bottom: 0.5em;
   pointer-events: none;
   color: #e8db82;
+
+  @include media-phone {
+    font-size: 1.25em;
+    right: 1em;
+  }
+
   &-close {
     display: block;
     font-size: 2em;
@@ -15,6 +21,10 @@
     top: 1.25em;
     right: 1.25em;
     cursor: pointer;
+
+    @include media-phone {
+      font-size: 1.15em;
+    }
   }
 
   .search--open & {
@@ -23,24 +33,15 @@
 }
 
 .search {
-  &__loader {
-    display: block;
-    font-size: 2em;
-    position: absolute;
-    top: 1.25em;
-    left: 1.25em;
-    padding: .34em;
-
-    @include media-phone {
-      font-size: 1.15em;
-    }
-  }
-
   &__form {
     position: relative;
     width: 50%;
     min-width: 300px;
     margin: 0 auto;
+    @include media-phone {
+      width: 100%;
+      padding: 2em 1em 0;
+    }
   }
 
   &__input {
@@ -53,11 +54,14 @@
     padding: 0 1em 0.15em 0;
     pointer-events: auto;
     border-bottom: 4px solid;
+    @include media-phone {
+      font-size: 2em;
+    }
   }
 }
 
 /* Transitions */
-.btn--search-close, .search__loader {
+.btn--search-close {
   opacity: 0;
   transform: scale3d(0.8, 0.8, 1);
   transition: opacity 0.5s, transform 0.5s;
@@ -65,12 +69,6 @@
 }
 
 .search {
-  &__loader--shown {
-    opacity: 1;
-    transform: scale3d(1, 1, 1);
-    transition-delay: 0.1s;
-  }
-
   &__form {
     transform: scale3d(0.5,0.5,1);
     transition: transform 0.5s;
@@ -89,26 +87,4 @@
     }
   }
 
-}
-
-
-@include media-phone {
-  .search {
-    &__form {
-      width: 100%;
-      padding: 2em 1em 0;
-    }
-    &__input {
-      font-size: 2em;
-    }
-  }
-
-  .btn--search {
-    font-size: 1.25em;
-    right: 1em;
-
-    &-close {
-      font-size: 1.15em;
-    }
-  }
 }

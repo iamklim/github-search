@@ -9,6 +9,7 @@
   width: 100%;
   min-height: 100vh;
   padding-top: 108px;
+
   @include media-phone {
     padding-top: 78px;
   }
@@ -36,10 +37,10 @@
 
   &--open {
     overflow: hidden;
-
   }
 }
 
+/* Transitions */
 .search {
   &:before {
     opacity: 0;
@@ -53,8 +54,6 @@
     &:before {
       opacity: 1;
     }
-
   }
-
 }
 

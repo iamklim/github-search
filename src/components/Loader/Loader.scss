@@ -1,13 +1,39 @@
 @import "../../vars";
+@import "../../mixins";
 
 .loader {
   display: block;
-  width: .9em;
-  height: .9em;
-  background-color: $textColor;
-  margin: auto;
-  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
-  animation: sk-rotateplane 1.2s infinite ease-in-out;
+  font-size: 2em;
+  position: absolute;
+  top: 1.25em;
+  left: 1.25em;
+  padding: .34em;
+
+  opacity: 0;
+  transform: scale3d(0.8, 0.8, 1);
+  transition: opacity 0.5s, transform 0.5s;
+  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+
+  @include media-phone {
+    font-size: 1.15em;
+  }
+
+  &--shown {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+    transition-delay: 0.1s;
+  }
+
+  &__inner {
+    display: block;
+    width: .9em;
+    height: .9em;
+    background-color: $textColor;
+    margin: auto;
+    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+  }
+
 }
 
 @-webkit-keyframes sk-rotateplane {
@@ -37,4 +63,3 @@
     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
   }
 }
-

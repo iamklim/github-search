@@ -1,35 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-
-import getPager from "../../services/getPager";
-import { resultsPerPage } from "../../config";
-
 import "./Pagination.scss";
 
-function Pagination({ totalItems, setCurrentPage, isLoading }) {
-  const [pager, setPager] = useState({});
-
-  const setPage = (page) => {
-    try {
-      // get new pager object for specified page
-      const pagerUpdated = getPager(totalItems, page, resultsPerPage);
-
-      setPager(pagerUpdated);
-      setCurrentPage(page);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  // go to fist page if totalItems has changed
-  const prevTotalItems = useRef(null);
-  useEffect(() => {
-    if ((totalItems || totalItems === 0) && totalItems !== prevTotalItems) {
-      prevTotalItems.current = totalItems;
-      setPage(1);
-    }
-  }, [totalItems]);
-
+function Pagination({ pager, onPageChange, isLoading }) {
   // generate single item of pagination
   const generateItem = ({
     key,
@@ -44,7 +17,7 @@ function Pagination({ totalItems, setCurrentPage, isLoading }) {
         key={key}
         className={`pagination__list-item ${
           isActive ? "pagination__list-item--active" : ""
-        } ${isDisabled ? "pagination__list-item--disabled" : ""} ${
+        } ${isDisabled || isLoading ? "pagination__list-item--disabled" : ""} ${
           onlyDesktop ? "pagination__list-item--desktop" : ""
         }`}
         onClick={onClick}
@@ -65,14 +38,14 @@ function Pagination({ totalItems, setCurrentPage, isLoading }) {
         {generateItem({
           key: "page-first",
           text: "First",
-          isDisabled: pager.currentPage === 1 || isLoading,
-          onClick: () => setPage(1),
+          isDisabled: pager.currentPage === 1,
+          onClick: () => onPageChange(1),
         })}
         {generateItem({
           key: "page-prev",
           text: "Previous",
-          isDisabled: pager.currentPage === 1 || isLoading,
-          onClick: () => setPage(pager.currentPage - 1),
+          isDisabled: pager.currentPage === 1,
+          onClick: () => onPageChange(pager.currentPage - 1),
         })}
         {pager.pages &&
           pager.pages.map((page, index) =>
@@ -80,22 +53,21 @@ function Pagination({ totalItems, setCurrentPage, isLoading }) {
               key: `page-${index}`,
               text: page,
               isActive: pager.currentPage === page,
-              isDisabled: isLoading,
-              onClick: () => setPage(page),
+              onClick: () => onPageChange(page),
               onlyDesktop: true,
             })
           )}
         {generateItem({
           key: "page-next",
           text: "Next",
-          isDisabled: pager.currentPage === pager.totalPages || isLoading,
-          onClick: () => setPage(pager.currentPage + 1),
+          isDisabled: pager.currentPage === pager.totalPages,
+          onClick: () => onPageChange(pager.currentPage + 1),
         })}
         {generateItem({
           key: "page-last",
           text: "Last",
-          isDisabled: pager.currentPage === pager.totalPages || isLoading,
-          onClick: () => setPage(pager.totalPages),
+          isDisabled: pager.currentPage === pager.totalPages,
+          onClick: () => onPageChange(pager.totalPages),
         })}
       </ul>
     </nav>
@@ -103,8 +75,8 @@ function Pagination({ totalItems, setCurrentPage, isLoading }) {
 }
 
 Pagination.propTypes = {
-  totalItems: PropTypes.number,
-  setCurrentPage: PropTypes.func,
+  pager: PropTypes.object,
+  onPageChange: PropTypes.func,
   isLoading: PropTypes.bool,
 };
 

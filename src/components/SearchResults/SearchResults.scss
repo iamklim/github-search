@@ -2,14 +2,9 @@
 @import "../../mixins";
 
 .search-results {
-  //pointer-events: auto;
   width: 95%;
   max-width: 1400px;
   margin: 0 auto;
-
-  .search--open & {
-    //pointer-events: none;
-  }
 }
 
 .results-table {
@@ -51,9 +46,11 @@
     word-break: break-word;
     max-height: 300px;
     overflow: hidden;
+
     &--left {
       text-align: left;
     }
+
     @include media-phone {
       &:nth-child(3) {
         display: none;

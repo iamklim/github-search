@@ -10,7 +10,12 @@
     width: 50%;
     max-width: 450px;
     text-align: left;
-    //pointer-events: none;
+
+    @include media-phone {
+      font-size: 0.85em;
+      width: 100%;
+      padding: 0 1em;
+    }
 
     &:nth-child(2) {
       margin: 0 3em;
@@ -88,12 +93,4 @@
     }
   }
 
-}
-
-@include media-phone {
-  .search__suggestion {
-    font-size: 0.85em;
-    width: 100%;
-    padding: 0 1em;
-  }
 }

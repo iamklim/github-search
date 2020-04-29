@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./SearchResults.scss";
 
-function SearchResults({ results }) {
-  const [items, setItems] = useState(null);
-
-  useEffect(() => {
-    if (results && results.items) {
-      setItems(results.items);
-    } else {
-      setItems(null);
-    }
-  }, [results]);
-
-  const itemsAvailable = items && items.length > 0;
+function SearchResults({ itemsFound }) {
+  const itemsAvailable = itemsFound && itemsFound.length > 0;
   const headerTitles = [
     "Id",
     "Name and link",
@@ -38,8 +28,8 @@ function SearchResults({ results }) {
   );
 
   const tableBody =
-    items &&
-    items.map((item) => {
+    itemsFound &&
+    itemsFound.map((item) => {
       const {
         id,
         html_url,
@@ -58,7 +48,7 @@ function SearchResults({ results }) {
             {id}
           </div>
           <div className="results-table__col" role="cell">
-            <a href={html_url} target="_blank">
+            <a href={html_url} target="_blank" rel="noopener noreferrer">
               {name}
             </a>
           </div>
@@ -94,7 +84,7 @@ function SearchResults({ results }) {
 }
 
 SearchResults.propTypes = {
-  results: PropTypes.object,
+  itemsFound: PropTypes.array,
 };
 
 export default SearchResults;

@@ -6,15 +6,15 @@ import axios from "axios";
 
 const getRepositories = ({
   query,
-  page = "1",
+  page = 1,
   sort = "stars",
   order = "desc",
   languages,
   cancelTokenSource,
 }) => {
+  console.log(page);
   try {
     let languageFilter = "";
-
     if (languages) {
       languages.forEach((language) => {
         if (language.isEnabled) {
@@ -23,7 +23,14 @@ const getRepositories = ({
       });
     }
 
-    const url = `${apiUrl}/search/repositories?q=${query}${languageFilter}&sort=${sort}&order=${order}&page=${page}&per_page=${resultsPerPage}`;
+    const requestBody = `${apiUrl}/search/repositories`;
+    const requestQuery = `q=${query}${languageFilter}`;
+    const requestSort = `sort=${sort}`;
+    const requestOrder = `order=${order}`;
+    const requestPage = `page=${page}`;
+    const requestPerPage = `per_page=${resultsPerPage}`;
+
+    const url = `${requestBody}?${requestQuery}&${requestSort}&${requestOrder}&${requestPage}&${requestPerPage}`;
 
     // caching requests using wrapper
     return requestWithCache.get(url, {

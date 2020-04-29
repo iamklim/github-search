@@ -3,18 +3,7 @@ import PropTypes from "prop-types";
 import RadioButton from "../RadioButton";
 import "./Suggestion.scss";
 
-function Suggestion({ languages, setLanguages, sorting, setSorting }) {
-  const onLanguageSelect = (value) => {
-    const languagesUpdated = [...languages];
-    setLanguages(
-      languagesUpdated.map((language) =>
-        value === language.key
-          ? { ...language, isEnabled: !language.isEnabled }
-          : language
-      )
-    );
-  };
-
+function Suggestion({ languages, onLanguageChange, sorting, onSortingChange }) {
   const languageList = languages && (
     <ul className="language-list">
       {languages.map((language) => (
@@ -23,17 +12,13 @@ function Suggestion({ languages, setLanguages, sorting, setSorting }) {
           className={`language-list__item ${
             language.isEnabled ? "language-list__item--active" : ""
           }`}
-          onClick={() => onLanguageSelect(language.key)}
+          onClick={() => onLanguageChange(language.key)}
         >
           {language.title}
         </li>
       ))}
     </ul>
   );
-
-  const onSortingChange = (e) => {
-    setSorting(e.target.value);
-  };
 
   return (
     <div className="search__suggestion">
@@ -63,9 +48,9 @@ function Suggestion({ languages, setLanguages, sorting, setSorting }) {
 
 Suggestion.propTypes = {
   languages: PropTypes.array,
-  setLanguages: PropTypes.func,
+  onLanguageChange: PropTypes.func,
   sorting: PropTypes.string,
-  setSorting: PropTypes.func,
+  onSortingChange: PropTypes.func,
 };
 
 export default Suggestion;
