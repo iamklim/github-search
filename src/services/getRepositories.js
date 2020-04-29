@@ -12,7 +12,6 @@ const getRepositories = ({
   languages,
   cancelTokenSource,
 }) => {
-  console.log(page);
   try {
     let languageFilter = "";
     if (languages) {
